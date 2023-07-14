@@ -93,6 +93,8 @@
     <button type="button" class="analyse_form" onclick="takeScreenshotAndUpload()">
         Analyse Form
     </button>
+
+    <input type="file" id="fileInput">
     
   </form>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -183,6 +185,48 @@
 
       return uniqueId;
     }
+  </script>
+  <script type="text/javascript">
+    // Function to handle the file upload
+    function handleFileUpload(file) {
+      // Create a new FormData object
+      var formData = new FormData();
+
+      // Append the file to the FormData object
+      formData.append('file', file);
+
+      // Send the FormData to the upload script using fetch
+      // fetch('submit_to_scan.php', {
+      fetch('submit_to_scan_from_s3.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(function(response) {
+          if (response.ok) {
+            console.log('File uploaded successfully.');
+          } else {
+            console.error('Error uploading file:', response.statusText);
+          }
+        })
+        .catch(function(error) {
+          console.error('Error uploading file:', error);
+        });
+    }
+
+    // Function to handle the file input change event
+    function handleFileInputChange(event) {
+      var fileInput = event.target;
+
+      // Get the selected file
+      var file = fileInput.files[0];
+
+      // Pass the file to the handleFileUpload function
+      handleFileUpload(file);
+    }
+
+    // Add an event listener to the file input element
+    var fileInput = document.getElementById('fileInput');
+    fileInput.addEventListener('change', handleFileInputChange);
   </script>
   <script>
     // JavaScript validation
