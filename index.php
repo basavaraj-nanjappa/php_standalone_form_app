@@ -72,11 +72,25 @@
 </head>
 <body>
   <h1>Form Example</h1>
-
+  <!-- catch me BEGIN -->
+  <div>  
+    <font color="blue">Deprecated Font Tag</font>
+    <button onclick="myFunction()">Click me</button>
+    <div style="color: red; font-size: 20px;">Piece of ....</div>
+  </div>
+  <div>
+    <p>Paragraph 1</p>
+    <br>
+    <p>Paragraph 2</p>
+    <br>
+    <p>Paragraph 3</p>
+</div>
+  
+  <!-- catch me END --->
   <form method="POST" action="">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
-
+ 
     <label for="age">Age:</label>
     <input type="number" id="age" name="age" required>
 
